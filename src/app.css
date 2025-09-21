@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@layer components {
+	.heading {
+		@apply mb-4 text-2xl font-semibold;
+	}
+
+	.input {
+		@apply min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none;
+	}
+
+	.input-sm {
+		@apply rounded-md border border-gray-300 px-3 py-1.5 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none;
+	}
+
+	.checkbox {
+		@apply h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500;
+	}
+
+	.btn {
+		@apply inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50;
+	}
+
+	/* Button size modifiers */
+	.btn-xs {
+		@apply px-2 py-1;
+	}
+	.btn-lg {
+		@apply px-4 py-2;
+	}
+
+	.btn-primary {
+		/* Variants should not @apply custom classes like .btn; only utilities */
+		@apply bg-blue-600 text-white hover:bg-blue-700;
+	}
+
+	.btn-green {
+		@apply bg-green-600 text-white hover:bg-green-700;
+	}
+
+	.btn-gray {
+		@apply bg-gray-100 text-gray-900 hover:bg-gray-200;
+	}
+
+	.btn-danger {
+		@apply bg-red-600 text-white hover:bg-red-700;
+	}
+
+	/* Icon-style buttons */
+	.btn-icon {
+		@apply inline-flex items-center justify-center rounded-full text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-50;
+	}
+	.btn-icon-danger {
+		/* Do not @apply custom classes; only Tailwind utilities */
+		@apply h-8 w-8 bg-red-600 text-white hover:bg-red-700;
+	}
+
+	/* Softer, smaller danger icon button (match checkbox size h-4 w-4) */
+	.btn-icon-danger-soft {
+		@apply inline-flex h-4 w-4 items-center justify-center rounded-md bg-red-500 text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-50;
+	}
+
+	/* Matching small icon buttons for success (save) and info (cancel) */
+	.btn-icon-success-soft {
+		@apply inline-flex h-4 w-4 items-center justify-center rounded-md bg-green-500 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50;
+	}
+	.btn-icon-info-soft {
+		@apply inline-flex h-4 w-4 items-center justify-center rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50;
+	}
+
+	.table-card {
+		@apply overflow-hidden rounded-md border border-gray-200;
+	}
+
+	.toolbar {
+		@apply flex items-center justify-end gap-2 border-b border-gray-200 bg-gray-50 p-2;
+	}
+
+	.menu {
+		@apply absolute z-10 mt-2 rounded-md border border-gray-200 bg-white p-2 shadow-lg;
+	}
+
+	/* Composite input wrapper (input + button as one control) */
+	.composite-input {
+		@apply flex w-full items-stretch overflow-hidden rounded-md border border-gray-300 bg-white focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-500;
+	}
+	.composite-input--error {
+		@apply border-red-300 bg-red-50/40 focus-within:border-red-400 focus-within:ring-red-500;
+	}
+	/* Subtle divider between input and button that collapses on focus */
+	.divider {
+		@apply w-px self-stretch rounded-full bg-gray-200 transition-all duration-150 ease-out group-focus-within:w-0 group-focus-within:bg-transparent;
+	}
+
+	/* Sortable header button for table columns */
+	.header-sort {
+		@apply inline-flex flex-1 cursor-pointer items-center justify-between gap-2 text-left;
+	}
+
+	.list {
+		@apply divide-y divide-gray-200 rounded-md border border-gray-200 bg-white shadow-sm;
+	}
+
+	.list-item {
+		@apply grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3;
+	}
+
+	.item-left {
+		@apply contents min-w-0; /* grid children supply the columns */
+	}
+
+	.actions {
+		@apply flex shrink-0 items-center gap-2 justify-self-end;
+	}
+
+	.title {
+		@apply block w-full min-w-0 truncate;
+	}
+
+	.title-editable {
+		@apply cursor-pointer rounded border border-transparent px-2 py-1 transition hover:border-gray-300 hover:bg-gray-50 hover:shadow-sm focus-visible:border-blue-300 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none active:translate-y-px active:shadow;
+	}
+
+	.input-bare {
+		@apply h-10 border-0 px-3 text-sm focus:border-transparent focus:shadow-none focus:ring-0 focus:outline-none;
+	}
+
+	.error-text {
+		@apply text-sm text-red-600;
+	}
+}
