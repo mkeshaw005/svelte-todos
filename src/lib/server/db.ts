@@ -12,7 +12,7 @@ export function getPool(): Pool {
 	return pool;
 }
 
-export async function query<T = any>(text: string, params?: any[]): Promise<{ rows: T[] }> {
+export async function query<T = unknown>(text: string, params?: unknown[]): Promise<{ rows: T[] }> {
 	const p = getPool();
 	const res = await p.query(text, params);
 	return { rows: res.rows as T[] };
