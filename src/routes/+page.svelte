@@ -59,11 +59,12 @@
 		try {
 			return new Date(ts).toLocaleString();
 		} catch {
-			return '';
+			/* ignore */
 		}
+		return '';
 	}
 
-	const columns: ColumnDef<Todo, any>[] = [
+	const columns: ColumnDef<Todo, unknown>[] = [
 		{
 			id: 'completed',
 			accessorFn: (row) => row.completed,
@@ -124,7 +125,9 @@
 		onColumnFiltersChange: (updater) => {
 			columnFilters = applyUpdater(columnFilters, updater);
 		},
-		onStateChange: () => {},
+		onStateChange: () => {
+			/* no-op */
+		},
 		renderFallbackValue: null,
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
@@ -151,7 +154,9 @@
 				const parsed = JSON.parse(rawSort);
 				if (Array.isArray(parsed)) sorting = parsed;
 			}
-		} catch {}
+		} catch {
+			/* ignore */
+		}
 		try {
 			const rawFilters = localStorage.getItem(FILTERS_STORAGE_KEY);
 			if (rawFilters) {
@@ -169,19 +174,25 @@
 					}
 				}
 			}
-		} catch {}
+		} catch {
+			/* ignore */
+		}
 	});
 
 	// Persist sorting and filters when they change
 	$: (() => {
 		try {
 			localStorage.setItem(SORT_STORAGE_KEY, JSON.stringify(sorting));
-		} catch {}
+		} catch {
+			/* ignore */
+		}
 	})();
 	$: (() => {
 		try {
 			localStorage.setItem(FILTERS_STORAGE_KEY, JSON.stringify({ doneFilterRaw, titleFilter }));
-		} catch {}
+		} catch {
+			/* ignore */
+		}
 	})();
 
 	// Sorting helpers
@@ -220,12 +231,16 @@
 				// Merge parsed into defaults to tolerate versioning
 				showCol = { ...defaultShowCol, ...parsed };
 			}
-		} catch {}
+		} catch {
+			/* ignore */
+		}
 	});
 	$: (() => {
 		try {
 			localStorage.setItem(SHOW_COL_STORAGE_KEY, JSON.stringify(showCol));
-		} catch {}
+		} catch {
+			/* ignore */
+		}
 	})();
 
 	function closeMenus() {
@@ -261,8 +276,11 @@
 	$: showNewTitleError = newTitleTouched && !newTitleFocused && Boolean(newTitleError);
 
 	// Track per-item pending state
+	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	let togglingIds = new Set<number>();
+	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	let deletingIds = new Set<number>();
+	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	let editingIds = new Set<number>();
 
 	// Inline edit state
